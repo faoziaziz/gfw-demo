@@ -13,6 +13,9 @@ curl -X POST http://localhost:8083/add -H 'Content-type:application/json' -d '{"
 curl -X POST http://localhost:8083/add -H 'Content-type:application/json' -d '{"id":"3", "name": "Kma", "salary": 120112}'
 
 curl -X POST http://localhost:8083/add -H 'Content-type:application/json' -d '{"id":"4", "name": "Kma", "salary": "1239"}'
+
+curl -X POST http://ec2-52-221-222-103.ap-southeast-1.compute.amazonaws.com:8080/add -H 'Content-type:application/json' -d '{"id":"3", "name": "Kma", "salary": 120112}'
+
 ```
 ## Referensi
 1. [Spring Tutorial ](https://spring.io/guides/tutorials/bookmarks/)

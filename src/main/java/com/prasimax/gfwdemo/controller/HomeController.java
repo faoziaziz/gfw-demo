@@ -35,7 +35,7 @@ public class HomeController {
 
     @PostMapping("/add")
     public User add(@RequestBody User user){
-        _userRepository.save(new User(user.getId(),user.getName(),80000L));
+        _userRepository.save(new User(user.getId(),user.getName(),user.getSalary()));
         return _userRepository.findById(user.getId());
 
     }
@@ -43,7 +43,7 @@ public class HomeController {
 
     @PostMapping("/update")
     public User update(@RequestBody User user){
-        _userRepository.update(new User(user.getId(),user.getName(),1000L));
+        _userRepository.update(new User(user.getId(),user.getName(),user.getSalary()));
         return _userRepository.findById(user.getId());
 
     }
