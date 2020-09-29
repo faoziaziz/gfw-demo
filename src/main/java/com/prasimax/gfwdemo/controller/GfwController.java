@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 class GfwController {
     @PostMapping("/gfw-data")
-    public String gfw-data(){
+    public String gfwdata(){
 	return "rasanya strawbery";
     }
     
