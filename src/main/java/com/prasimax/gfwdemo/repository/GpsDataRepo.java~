@@ -1,0 +1,22 @@
+package com.prasimax.gfwdemo.repository;
+
+import com.prasimax.gfwdemo.models.GpsData;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
+
+@Repository
+public class GpsDataRepo implements GpsDataRepo {
+    private RedisTemplate<String, GpsData> redisTemplate;
+    private HashOperations hashOperations;
+
+    public UserRepositoryImpl(RedisTemplate<String, GpsData> redisTemplate){
+	this.redisTemplate=redisTemplate;
+	hashOperations=redisTemplate.opsForHash();
+	
+    }
+
+}
