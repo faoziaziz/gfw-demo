@@ -1,0 +1,87 @@
+% Created 2020-10-01 Kam 13:29
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Aziz Faozi}
+\date{\today}
+\title{GFW}
+\hypersetup{
+ pdfauthor={Aziz Faozi},
+ pdftitle={GFW},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+
+\section{Pengantar}
+\label{sec:orgdb9e30b}
+\section{Desain}
+\label{sec:org3656973}
+\subsection{Format Pesan}
+\label{sec:org8dc29b2}
+\subsubsection{v1}
+\label{sec:org6b0d1f1}
+untuk API versi pertama mengunakan perintah berikut ini
+\begin{verbatim}
+
+{
+"id":"5",
+"device":"dev112",
+"longitude":123.321,
+"latitude":321.12,
+"dateStamp":"datetimebentukstring"
+}
+
+\end{verbatim}
+Dengan command seperti berikut 
+\begin{verbatim}
+curl -X POST http://localhost:8080/api-gfw/v1/add \
+-H 'Content-type:application/json' -d \
+'{"id":"100", "device": "dev112", "longitude": \
+ 123.321, "latitude": 321.12, \
+"DateStamp": "ngaceng"}'
+\end{verbatim}
+
+\subsubsection{v2}
+\label{sec:orga349de1}
+Untuk perbaikan di versi pertama dengan tetap mempertahankan 
+versi pertama maka format pesan di buat pada v2 adalah sebagai berikut
+\begin{verbatim}
+{
+"device":"device1234",
+"data": {
+"position": {
+"longitude": [123.321, 123.321, ...]
+"latitude": [321.321, 123.321, ...]
+"datestamp": ["pos1", "pos2", ...]
+}
+}
+}
+\end{verbatim}
+\section{Logbook}
+\label{sec:orgfed0cc3}
+\subsection{Masalah}
+\label{sec:orge3f5cea}
+
+\subsubsection{\textit{<2020-10-01 Kam 12:31>}}
+\label{sec:org052c2e2}
+Masih ada masalah dengan methode insert id di api. 
+\end{document}

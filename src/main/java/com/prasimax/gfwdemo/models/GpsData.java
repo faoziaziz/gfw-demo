@@ -6,13 +6,18 @@
 package com.prasimax.gfwdemo.models;
 
 import java.io.Serializable;
+import org.springframework.data.annotation.Id;
 
 public class GpsData implements Serializable {
+
+    @Id
     private String id;
     private String Device;
     private Float Longitude;
     private Float Latitude;
     private String DateStamp;
+
+    
 
     public GpsData(String id, String Device, Float Longitude, Float Latitude, String DateStamp){
 	this.id=id;

@@ -12,7 +12,11 @@ curl -X POST http://localhost:8083/add -H 'Content-type:application/json' -d '{"
 
 curl -X POST http://localhost:8083/add -H 'Content-type:application/json' -d '{"id":"3", "name": "Kma", "salary": 120112}'
 
-curl -X POST http://localhost:8083/add -H 'Content-type:application/json' -d '{"id":"4", "name": "Kma", "salary": "1239"}'
+curl -X POST http://localhost:8083/api-gfw/v1/add -H 'Content-type:application/json' -d '{"id":"4", "device": "dev112", "longitude": 123.321, "latitude": 321.12, "DateStamp": "kontol"}'
+
+curl -X POST http://localhost:8080/api-gfw/v1/add -H 'Content-type:application/json' -d '{"id":"bokerdinerak4", "device": "dev112", "longitude": 123.321, "latitude": 321.12, "DateStamp": "kontol"}'
+
+curl -X POST http://localhost:8083/api-gfw/v1/add -H 'Content-type:application/json' -d '{"id":"4", "name": "Kma", "salary": "1239"}'
 
 curl -X POST http://ec2-52-221-222-103.ap-southeast-1.compute.amazonaws.com:8080/add -H 'Content-type:application/json' -d '{"id":"3", "name": "Kma", "salary": 120112}'
 

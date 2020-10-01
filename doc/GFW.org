@@ -1,0 +1,50 @@
+#+TITLE: GFW
+
+
+* Pengantar
+* Desain
+** Format Pesan
+*** v1
+Untuk API versi pertama mengunakan perintah berikut ini
+#+BEGIN_SRC txt
+
+{
+"id":"5",
+"device":"dev112",
+"longitude":123.321,
+"latitude":321.12,
+"dateStamp":"datetimebentukstring"
+}
+
+#+END_SRC
+Dengan command seperti berikut 
+#+BEGIN_SRC bash
+curl -X POST http://localhost:8080/api-gfw/v1/add \
+-H 'Content-type:application/json' -d \
+'{"id":"100", "device": "dev112", "longitude": \
+ 123.321, "latitude": 321.12, \
+"DateStamp": "ngaceng"}'
+#+END_SRC
+
+*** v2
+Untuk perbaikan di versi pertama dengan tetap mempertahankan 
+versi pertama maka format pesan di buat pada v2 adalah sebagai berikut
+#+BEGIN_SRC txt
+{
+"device":"device1234",
+"data": {
+"position": {
+"longitude": [123.321, 123.321, ...]
+"latitude": [321.321, 123.321, ...]
+"datestamp": ["pos1", "pos2", ...]
+}
+}
+}
+#+END_SRC
+* Logbook
+** Masalah 
+*** AutoInsert API
+Tanggal kasus : <2020-10-01 Kam 12:31> . 
+Deskripsi : Masih ada masalah dengan methode insert id di api. 
+Setiap insert data belum bisa autoincremenet id. 
+

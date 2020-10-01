@@ -2,6 +2,7 @@ package com.prasimax.gfwdemo;
 
 /* ini bagian untuk import models*/
 import com.prasimax.gfwdemo.models.User;
+import com.prasimax.gfwdemo.models.GpsData;
 /* end import model */
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,6 +27,13 @@ public class GfwDemoApplication {
 	RedisTemplate<String, User> redisTemplate = new RedisTemplate<>();
 	redisTemplate.setConnectionFactory(jedisConnectionFactory());
 	return redisTemplate;
+    }
+
+    @Bean
+    RedisTemplate<String, GpsData> redisTemplate2() {
+	RedisTemplate<String, GpsData> redisTemplate2 = new RedisTemplate<>();
+	redisTemplate2.setConnectionFactory(jedisConnectionFactory());
+	return redisTemplate2;
     }
 
     public static void main(String[] args) {

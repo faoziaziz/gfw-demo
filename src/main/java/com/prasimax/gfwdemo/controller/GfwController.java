@@ -23,18 +23,19 @@ class GfwController {
 	_gpsDataRepo = gpsDataRepo;
     }
     @GetMapping("/all")
-    public Map<String, User> GetAll(){
+    public Map<String, GpsData> GetAll(){
 	return _gpsDataRepo.findAll();
     }
 
     @GetMapping("/all/{id}")
-    public GpsData(@PathVariable("id") final String id){
-	return _gpsDataRepo.findAll();
+    public GpsData GpsAll(@PathVariable("id") final String id){
+	return _gpsDataRepo.findById(id);
     }
 
     @PostMapping("/add")
     public GpsData add(@RequestBody GpsData gpsData){
-	_gpsDataRepo.save(new GpsData(gpsData.getId(),
+	_gpsDataRepo.save(new GpsData(
+				      gpsData.getId(),
 				      gpsData.getDevice(),
 				      gpsData.getLongitude(),
 				      gpsData.getLatitude(),
@@ -45,7 +46,8 @@ class GfwController {
 
     @PostMapping("/update")
     public GpsData update(@RequestBody GpsData gpsData){
-	_gpsDataRepo.update(new GpsData(gpsData.getId(),
+	_gpsDataRepo.update(new GpsData(
+					gpsData.getId(),
 					gpsData.getDevice(),
 					gpsData.getLongitude(),
 					gpsData.getLatitude(),

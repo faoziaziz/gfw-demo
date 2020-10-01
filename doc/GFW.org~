@@ -1,0 +1,15 @@
+#+TITLE: GFW
+
+
+* Pengantar
+* Desain
+** Format Pesan
+#+BEGIN_SRC JSON
+
+{"id":"5",
+"device":"dev112",
+"longitude":123.321,
+"latitude":321.12,
+"dateStamp":"datetimebentukstring"}
+
+#+END_SRC

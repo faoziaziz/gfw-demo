@@ -13,24 +13,24 @@ public class GpsDataRepoImpl implements GpsDataRepo {
     private RedisTemplate<String, GpsData> redisTemplate;
     private HashOperations hashOperations;
 
-    public GpsDataRepoImpl(RedisTemplate<String, GpsData> redisTemplate){
+    public UserRepositoryImpl(RedisTemplate<String, GpsData> redisTemplate){
 	this.redisTemplate=redisTemplate;
 	hashOperations=redisTemplate.opsForHash();
 	
     }
     @Override
     public void save(GpsData gpsData){
-	hashOperations.put("GPSDATA", gpsData.getId(), gpsData);
+	hashOperation.put("GPSDATA", gpsData.getId(), gpsData);
     }
     @Override
-    public Map<String, GpsData> findAll(){
-	return hashOperations.entries("GPSDATA");
+    public Map<String, User> findAll(){
+	return hashOperation.entries("GPSDATA");
 
     }
 
     @Override
-    public GpsData findById(String id){
-	return (GpsData)hashOperations.get("GPSDATA", id);
+    pubilc GpsData findById(String id){
+	return (GpsData)hashOperation.get("GPSDATA", id);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class GpsDataRepoImpl implements GpsDataRepo {
 
     @Override
     public void delete(String id){
-	hashOperations.delete("GPSDATA", id);
+	hashOperation.delete("GPSDATA", id);
     }
 
     

@@ -6,12 +6,14 @@
 package com.prasimax.gfwdemo.models;
 
 import java.io.Serializable;
+//import org.springframework.data.annotation.Id;
 
 public class User implements Serializable {
-
-     private String id;
-     private String name;
-     private Long salary;
+    
+    //@Id
+    private String id;
+    private String name;
+    private Long salary;
 
     public User(String id, String name, Long salary) {
         this.id = id;
