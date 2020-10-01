@@ -28,9 +28,6 @@ public class GfwDemoApplication {
 	return redisTemplate;
     }
 
-
-    
-
     public static void main(String[] args) {
 	SpringApplication.run(GfwDemoApplication.class, args);
     }
