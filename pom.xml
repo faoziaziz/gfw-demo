@@ -48,6 +48,8 @@
 			<version>2.4.0</version>
 		</dependency>
 
+		
+
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
@@ -76,7 +78,12 @@
       <plugin>
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
+	  </plugin>
+	  <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-checkstyle-plugin</artifactId>
+		<version>${checkstyle.version}</version>
+	</plugin>
     </plugins>
   </build>
 
