@@ -60,11 +60,13 @@ class GfwController {
                       gpsData.getMode(),
                       gpsData.getTime(),
                       gpsData.getLatitude(),
-				      gpsData.getLongitude(),
+                      gpsData.getLongitude(),
+                      gpsData.getAltitude(),
                      gpsData.getSpeed(),
                      gpsData.getTrack(),
                      gpsData.getPdop()
-				      ));
+                      ));
+                      
 	return _gpsDataRepo.findById(gpsData.getId());
     }
 
