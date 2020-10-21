@@ -84,6 +84,7 @@ class GfwController {
         gpsData.getTime(),
         gpsData.getLatitude(),
         gpsData.getLongitude(),
+        gpsData.getAltitude(),
        gpsData.getSpeed(),
        gpsData.getTrack(),
        gpsData.getPdop()));
