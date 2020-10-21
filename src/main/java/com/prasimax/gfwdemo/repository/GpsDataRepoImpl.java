@@ -22,6 +22,7 @@ public class GpsDataRepoImpl implements GpsDataRepo {
     public void save(GpsData gpsData){
 	hashOperations.put("GPSDATA", gpsData.getId(), gpsData);
     }
+    
     @Override
     public Map<String, GpsData> findAll(){
 	return hashOperations.entries("GPSDATA");

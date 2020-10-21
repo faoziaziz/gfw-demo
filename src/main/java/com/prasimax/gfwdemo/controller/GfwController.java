@@ -32,14 +32,39 @@ class GfwController {
 	return _gpsDataRepo.findById(id);
     }
 
+    /*
+    GpsData(
+        String id, 
+        String Device, 
+        String DateStamp,
+        Float online,
+        Float status,
+        Float satelites_used,
+        Float mode,
+        Float time,
+        Float Latitude, 
+        Float Longitude,
+        Float altitude,
+        Float speed,
+        Float track, Float pdop)
+    */
     @PostMapping("/add")
     public GpsData add(@RequestBody GpsData gpsData){
 	_gpsDataRepo.save(new GpsData(
 				      gpsData.getId(),
-				      gpsData.getDevice(),
+                      gpsData.getDevice(),
+                      gpsData.getDateStamp(),
+                      gpsData.getOnline(),
+                      gpsData.getStatus(),
+                      gpsData.getSateliteUsed(),
+                      gpsData.getMode(),
+                      gpsData.getTime(),
+                      gpsData.getLatitude(),
 				      gpsData.getLongitude(),
-				      gpsData.getLatitude(),
-				      gpsData.getDateStamp()));
+                     gpsData.getSpeed(),
+                     gpsData.getTrack(),
+                     gpsData.getPdop()
+				      ));
 	return _gpsDataRepo.findById(gpsData.getId());
     }
 
@@ -47,11 +72,19 @@ class GfwController {
     @PostMapping("/update")
     public GpsData update(@RequestBody GpsData gpsData){
 	_gpsDataRepo.update(new GpsData(
-					gpsData.getId(),
-					gpsData.getDevice(),
-					gpsData.getLongitude(),
-					gpsData.getLatitude(),
-					gpsData.getDateStamp()));
+        gpsData.getId(),
+        gpsData.getDevice(),
+        gpsData.getDateStamp(),
+        gpsData.getOnline(),
+        gpsData.getStatus(),
+        gpsData.getSateliteUsed(),
+        gpsData.getMode(),
+        gpsData.getTime(),
+        gpsData.getLatitude(),
+        gpsData.getLongitude(),
+       gpsData.getSpeed(),
+       gpsData.getTrack(),
+       gpsData.getPdop()));
 	return _gpsDataRepo.findById(gpsData.getId());
     }
     
