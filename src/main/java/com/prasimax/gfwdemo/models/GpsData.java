@@ -16,39 +16,39 @@ public class GpsData implements Serializable {
     private String DateStamp;
 
     /* oke saya ganteng */
-    private Float online;
-    private Float status;
-    private Float satelites_used;
-    private Float mode;
-    private Float time;
-    private Float Latitude;
-    private Float Longitude;
-    private Float altitude;
-    private Float speed;
-    private Float track;
-    private Float pdop;
+    private double online;
+    private double status;
+    private double sateliteUsed;
+    private double mode;
+    private double time;
+    private double Latitude;
+    private double Longitude;
+    private double altitude;
+    private double speed;
+    private double track;
+    private double pdop;
 
     public GpsData(
         String id, 
         String Device, 
         String DateStamp,
-        Float online,
-        Float status,
-        Float satelites_used,
-        Float mode,
-        Float time,
-        Float Latitude, 
-        Float Longitude,
-        Float altitude,
-        Float speed,
-        Float track,
-	Float pdop){
+        double online,
+        double status,
+        double sateliteUsed,
+        double mode,
+        double time,
+        double Latitude, 
+        double Longitude,
+        double altitude,
+        double speed,
+        double track,
+	double pdop){
             this.id=id;
             this.Device=Device;
             this.DateStamp=DateStamp;
             this.online=online;
             this.status=status;
-            this.satelites_used=satelites_used;
+            this.sateliteUsed=sateliteUsed;
             this.mode=mode;
             this.time=time;
             this.Latitude=Latitude;
@@ -76,27 +76,27 @@ public class GpsData implements Serializable {
     }
 
     /* setter end getter online */
-    public Float getOnline(){
+    public double getOnline(){
         return online;
     }
-    public void setOnline(Float online){
+    public void setOnline(double online){
         this.online=online;
     }
 
     /* setter end getter status */
-    public Float getStatus(){
+    public double getStatus(){
         return status;
     }
-    public void setStatus(Float status){
+    public void setStatus(double status){
         this.status=status;
     }
 
     /* setter end getter satelites_used */
-    public Float getSateliteUsed(){
-        return status;
+    public double getSateliteUsed(){
+        return sateliteUsed;
     }
-    public void setSateliteUsed(Float status){
-        this.satelites_used=satelites_used;
+    public void setSateliteUsed(double sateliteUsed){
+        this.sateliteUsed=sateliteUsed;
     }
 
     /*
@@ -105,20 +105,20 @@ public class GpsData implements Serializable {
         
     */
 
-    public Float getMode(){
+    public double getMode(){
         return mode;
     }
 
-    public void setMode(Float mode){
+    public void setMode(double mode){
         this.mode=mode;
     }
 
     /* time */
-    public Float getTime(){
+    public double getTime(){
         return time;
     }
 
-    public void setTime(Float time){
+    public void setTime(double time){
         this.time=time;
     }
     /*
@@ -127,53 +127,53 @@ public class GpsData implements Serializable {
         
      
     */
-    public Float getAltitude(){
+    public double getAltitude(){
         return altitude;
     }
-    public void setAltitude(Float altitude){
+    public void setAltitude(double altitude){
         this.altitude=altitude;
 
     }
     /*
        Float track, Float pdop
     */
-    public Float getTrack(){
+    public double getTrack(){
         return track;
     }
-    public void setTrack(Float track){
+    public void setTrack(double track){
         this.track=track;
     }
 
     /* pdop */
-    public Float getPdop(){
+    public double getPdop(){
         return pdop;
     }
-    public void setPdop(Float pdop){
+    public void setPdop(double pdop){
         this.pdop=pdop;
     }
-    public Float getSpeed(){
+    public double getSpeed(){
         return speed;
 
     }
-    public void setSpeed(Float speed)
+    public void setSpeed(double speed)
     {
         this.speed=speed;
 
     }
 
     /* longitude setter and getter */
-    public Float getLongitude(){
+    public double getLongitude(){
 	return Longitude;
     }
-    public void setLongitude(Float Longitude){
+    public void setLongitude(double Longitude){
 	this.Longitude=Longitude;
     }
     
     /* lattitude setter and getter */
-    public Float getLatitude(){
+    public double getLatitude(){
 	return Latitude;
     }
-    public void setLatitude(Float Latitude){
+    public void setLatitude(double Latitude){
 	this.Latitude=Latitude;
     }
 
