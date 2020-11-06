@@ -41,7 +41,8 @@ public class GpsData implements Serializable {
         Float Longitude,
         Float altitude,
         Float speed,
-        Float track, Float pdop){
+        Float track,
+	Float pdop){
             this.id=id;
             this.Device=Device;
             this.DateStamp=DateStamp;
