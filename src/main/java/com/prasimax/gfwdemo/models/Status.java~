@@ -10,11 +10,11 @@ public class Status {
 
     }
 
-    public long getKode(){
+    public getKode(){
 	return kode;
     }
 
-    public String getStatus(){
+    public getStatus(){
 	return status;
 
     }
