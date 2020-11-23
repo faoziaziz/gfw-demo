@@ -1,4 +1,4 @@
-% Created 2020-11-23 Mon 21:33
+% Created 2020-11-23 Mon 21:41
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -16,33 +16,33 @@
 \usepackage{hyperref}
 \author{Aziz Amerul Faozi}
 \date{\today}
-\title{}
+\title{GFW Doc}
 \hypersetup{
  pdfauthor={Aziz Amerul Faozi},
- pdftitle={},
+ pdftitle={GFW Doc},
  pdfkeywords={},
  pdfsubject={},
  pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
  pdflang={English}}
 \begin{document}
 
+\maketitle
 \tableofcontents
 
-oo\#+TITLE: GFW Doc
 
 \section{Pengantar}
-\label{sec:org82a1e5a}
+\label{sec:orgcb7f619}
 Dokument ini merupakan penjelasan kerja dan beragam setting configurasi serta 
 lokasi log error untuk melakukan perbaikan atau ketika menjalankan aplikasi
 yang ditanamkan pada dragonboard ataupun aplikasi yang dijalakan di server.
 \section{Desain}
-\label{sec:org6dad0a4}
+\label{sec:orgfdb7b7a}
 \subsection{Client}
-\label{sec:orgf4a2f39}
+\label{sec:org935fa69}
 Untuk Clientnya dibangun dengan menggunakan bahasa C. Menggunakan pthread, curl, sqlite3,
 dan libgpsd
 \subsubsection{Run Time}
-\label{sec:org99f0d7f}
+\label{sec:orgbc08caa}
 Karena menggunakan dinamic linking maka beberapa runtime harus tersedia di sbc dragonboard.
 Tetapi jika anda ingin melakukan development langsung pada device maka berikut  yang harus 
 diinstall.
@@ -54,7 +54,7 @@ diinstall.
 \item sqlite3
 \end{enumerate}
 \subsubsection{Install dependency}
-\label{sec:orgf76bae1}
+\label{sec:org8404cb3}
 \begin{verbatim}
 sudo apt-get install cmake make unzip
 sudo apt-get install libcurl4-openssl-dev
@@ -73,21 +73,21 @@ cmake -DCMAKE_INSTALL_PREFIX=/usr \
 make && sudo make install
 \end{verbatim}
 \subsubsection{Clone repository}
-\label{sec:orgc5a1a7a}
+\label{sec:org332e228}
 \begin{verbatim}
 wget https://github.com/faoziaziz/api-gfw/archive/latest.zip
 unzip latest.zip
 cd api-gfw-latest/
 \end{verbatim}
 \subsubsection{Membuat directory installer}
-\label{sec:orgde89244}
+\label{sec:org849e891}
 sebelum membuat membuild program pertama buatlah directory
 \begin{verbatim}
 sudo mkdir -p /opt/gfw 
 sudo chown $USER:$USER /opt/gfw/
 \end{verbatim}
 \subsubsection{Untuk membuild program}
-\label{sec:org0b3366d}
+\label{sec:orgb8f2311}
 \begin{verbatim}
 autoreconf -i
 ./configure --prefix=/opt/gfw/
@@ -100,20 +100,20 @@ setelah terinstall maka akan ada file
 \end{verbatim}
 dengan mengeksekusi file tersebut maka program akan berjalan.
 \subsubsection{Log Error}
-\label{sec:org3f19558}
+\label{sec:org260428d}
 log error tersedia pada 
 \begin{verbatim}
 /opt/gfw/error.log
 \end{verbatim}
 \subsubsection{Database Device}
-\label{sec:org5e01aff}
+\label{sec:orgd6d7b0b}
 Jika tidak terdapat koneksi untuk mengirimkan data ke server maka file akan disimpan pada 
 database local 
 \begin{verbatim}
 /opt/gfw/gfw_data_gps.db
 \end{verbatim}
 \subsubsection{Konfigurasi Lainnya}
-\label{sec:org752aaf1}
+\label{sec:org7ab5aa8}
 Anda juga bisa melakukan setting terhadap nama device, link url API atau  lokasi database local
 dengan mengedit file src/conf.h pada code yang di download.
 \begin{verbatim}
@@ -131,12 +131,12 @@ dengan mengedit file src/conf.h pada code yang di download.
 #endif
 \end{verbatim}
 \subsection{Server}
-\label{sec:orga6ade7a}
+\label{sec:orgea730b5}
 Server menggunakan Spring-boot untuk aplikasi pengolah data dan Redis sebagai data
 storagenya. Data yang dikirimkan dari device menuju server menggunakan perantara 
 JSON. 
 \subsubsection{Contoh data}
-\label{sec:org7748717}
+\label{sec:orga5539fc}
 Contoh data yang di tampilkan dalam bentuk JSON
 \begin{verbatim}
 { 
@@ -183,9 +183,9 @@ dateStamp & Merupakan waktu kirim data dari device ke server.\\
 \end{center}
 
 \subsection{Link API pada server}
-\label{sec:org1682545}
+\label{sec:org6854931}
 \subsubsection{Link API untuk GET semua data}
-\label{sec:org9999438}
+\label{sec:org380f757}
 Untuk mendapatkan data dari seluruh data yang tersimpan pada
 server anda bisa melakukan transaksi seperti berikut.
 \begin{center}
@@ -198,7 +198,7 @@ RESPONSE & list Semua Data\\
 \end{center}
 
 \subsubsection{Link API untuk POST data}
-\label{sec:orgb49a8c2}
+\label{sec:org8cd5396}
 Untuk menambahkan data GPS pada server anda bisa melakukan
 transaksi dengan metode seperti berikut
 \begin{center}
@@ -225,7 +225,7 @@ RESPONSE & Sama seperti REQ\(_{\text{BODY}}\)\\
 \end{tabular}
 \end{center}
 \subsubsection{Link untuk Status Server}
-\label{sec:org8ba774e}
+\label{sec:org1449cdf}
 Untuk keperluan tertentu anda bisa melakukan checking server
 dengan melakukan GET pada URL berikut
 \begin{center}
@@ -237,11 +237,11 @@ RESPONSE & \{"kode":1,"status":"OK"\}\\
 \end{center}
 
 \section{Logbook}
-\label{sec:org566ea6a}
+\label{sec:org76cbdf3}
 \subsection{Masalah}
-\label{sec:orgfff8722}
+\label{sec:org9f011b6}
 \subsubsection{AutoInsert API}
-\label{sec:org7bd8203}
+\label{sec:org7146d5c}
 Tanggal kasus : \textit{<2020-10-01 Thu 12:31> } . 
 Deskripsi : Masih ada masalah dengan methode insert id di api. 
 Setiap insert data belum bisa autoincremenet id. 

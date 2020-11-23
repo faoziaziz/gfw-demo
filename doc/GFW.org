@@ -1,4 +1,4 @@
-oo#+TITLE: GFW Doc
+#+TITLE: GFW Doc
 #+AUTHOR: Aziz Amerul Faozi
 
 * Pengantar
