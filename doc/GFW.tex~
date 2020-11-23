@@ -1,4 +1,4 @@
-% Created 2020-11-23 Mon 19:37
+% Created 2020-11-23 Mon 21:20
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -14,31 +14,129 @@
 \usepackage{amssymb}
 \usepackage{capt-of}
 \usepackage{hyperref}
+\author{Aziz Amerul Faozi}
 \date{\today}
-\title{GFW}
+\title{}
 \hypersetup{
- pdfauthor={},
- pdftitle={GFW},
+ pdfauthor={Aziz Amerul Faozi},
+ pdftitle={},
  pdfkeywords={},
  pdfsubject={},
  pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
  pdflang={English}}
 \begin{document}
 
-\maketitle
 \tableofcontents
 
-
+o\#+TITLE: GFW Doc
 
 \section{Pengantar}
-\label{sec:org5531ce1}
+\label{sec:org9f27575}
+Dokument ini merupakan penjelasan kerja dan beragam setting configurasi serta 
+lokasi log error untuk melakukan perbaikan atau ketika menjalankan aplikasi
+yang ditanamkan pada dragonboard ataupun aplikasi yang dijalakan di server.
 \section{Desain}
-\label{sec:orgd3c22ce}
+\label{sec:org4328da9}
+\subsection{Client}
+\label{sec:org06cb720}
+Untuk Clientnya dibangun dengan menggunakan bahasa C. Menggunakan pthread, curl, sqlite3,
+dan libgpsd
+\subsubsection{Run Time}
+\label{sec:org05ca8df}
+Karena menggunakan dinamic linking maka beberapa runtime harus tersedia di sbc dragonboard.
+Tetapi jika anda ingin melakukan development langsung pada device maka berikut  yang harus 
+diinstall.
 
-\subsection{Format Pesan}
-\label{sec:orgf3eab6e}
+\begin{enumerate}
+\item GNU build system (autoconf, automake, libtool)
+\item Curl
+\item pthread
+\item sqlite3
+\end{enumerate}
+\subsubsection{Install dependency}
+\label{sec:org0b1f47d}
+\begin{verbatim}
+sudo apt-get install cmake make unzip
+sudo apt-get install libcurl4-openssl-dev
+sudo apt-get install libgps-dev libsqlite3-dev
+sudo apt-get install qdsp-start
+wget  https://s3.amazonaws.com/json-c_releases/releases/json-c-0.15.tar.gz
+tar -zxvf json-c-0.15.tar.gz
+cd json-c-0.15
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DBUILD_STATIC_LIBS=OFF    \
+      .. &&
+make && sudo make install
+\end{verbatim}
+\subsubsection{Clone repository}
+\label{sec:org791563b}
+\begin{verbatim}
+wget https://github.com/faoziaziz/api-gfw/archive/latest.zip
+unzip latest.zip
+cd api-gfw-latest/
+\end{verbatim}
+\subsubsection{Membuat directory installer}
+\label{sec:org939b662}
+sebelum membuat membuild program pertama buatlah directory
+\begin{verbatim}
+sudo mkdir -p /opt/gfw 
+sudo chown $USER:$USER /opt/gfw/
+\end{verbatim}
+\subsubsection{Untuk membuild program}
+\label{sec:orgd2105ce}
+\begin{verbatim}
+autoreconf -i
+./configure --prefix=/opt/gfw/
+make 
+make install
+\end{verbatim}
+setelah terinstall maka akan ada file 
+\begin{verbatim}
+/opt/gfw/bin/api-gfw-client
+\end{verbatim}
+dengan mengeksekusi file tersebut maka program akan berjalan.
+\subsubsection{Log Error}
+\label{sec:org02f64a0}
+log error tersedia pada 
+\begin{verbatim}
+/opt/gfw/error.log
+\end{verbatim}
+\subsubsection{Database Device}
+\label{sec:orge6bfefe}
+Jika tidak terdapat koneksi untuk mengirimkan data ke server maka file akan disimpan pada 
+database local 
+\begin{verbatim}
+/opt/gfw/gfw_data_gps.db
+\end{verbatim}
+\subsubsection{Konfigurasi Lainnya}
+\label{sec:org6887d7b}
+Anda juga bisa melakukan setting terhadap nama device, link url API atau  lokasi database local
+dengan mengedit file src/conf.h pada code yang di download.
+\begin{verbatim}
+#ifndef __conf_h
+#define __conf_h
+
+/* this debug setting */
+#define DEBUG 1
+/* url api configuration*/
+#define URL_API "http://server.faozi.tech:8083/api-gfw/v1"
+
+#define DEVICE "DRAGON001"
+#define DATABASE_LOC "/opt/gfw/gfw_data_gps.db"
+
+#endif
+\end{verbatim}
+\subsection{Server}
+\label{sec:org9e6e4de}
+Server menggunakan Spring-boot untuk aplikasi pengolah data dan Redis sebagai data
+storagenya. Data yang dikirimkan dari device menuju server menggunakan perantara 
+JSON. 
 \subsubsection{Contoh data}
-\label{sec:orgb76c52b}
+\label{sec:orgcb78ba5}
 Contoh data yang di tampilkan dalam bentuk JSON
 \begin{verbatim}
 { 
@@ -85,9 +183,9 @@ dateStamp & Merupakan waktu kirim data dari device ke server.\\
 \end{center}
 
 \subsection{Link API pada server}
-\label{sec:org7f60d4a}
+\label{sec:orga54c5c0}
 \subsubsection{Link API untuk GET semua data}
-\label{sec:org0cbe721}
+\label{sec:org5ce9d9f}
 Untuk mendapatkan data dari seluruh data yang tersimpan pada
 server anda bisa melakukan transaksi seperti berikut.
 \begin{center}
@@ -100,7 +198,7 @@ RESPONSE & list Semua Data\\
 \end{center}
 
 \subsubsection{Link API untuk POST data}
-\label{sec:org51c89a1}
+\label{sec:org887fce7}
 Untuk menambahkan data GPS pada server anda bisa melakukan
 transaksi dengan metode seperti berikut
 \begin{center}
@@ -127,7 +225,7 @@ RESPONSE & Sama seperti REQ\(_{\text{BODY}}\)\\
 \end{tabular}
 \end{center}
 \subsubsection{Link untuk Status Server}
-\label{sec:org8606fbc}
+\label{sec:org6bb1e53}
 Untuk keperluan tertentu anda bisa melakukan checking server
 dengan melakukan GET pada URL berikut
 \begin{center}
@@ -139,11 +237,11 @@ RESPONSE & \{"kode":1,"status":"OK"\}\\
 \end{center}
 
 \section{Logbook}
-\label{sec:orgcc1a9c9}
+\label{sec:org1230737}
 \subsection{Masalah}
-\label{sec:org8ad9652}
+\label{sec:org2467e2f}
 \subsubsection{AutoInsert API}
-\label{sec:orgeb7f8b4}
+\label{sec:org6fef462}
 Tanggal kasus : \textit{<2020-10-01 Thu 12:31> } . 
 Deskripsi : Masih ada masalah dengan methode insert id di api. 
 Setiap insert data belum bisa autoincremenet id. 

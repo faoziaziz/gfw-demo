@@ -1,7 +1,10 @@
-#+TITLE: GFW
-
+oo#+TITLE: GFW Doc
+#+AUTHOR: Aziz Amerul Faozi
 
 * Pengantar
+Dokument ini merupakan penjelasan kerja dan beragam setting configurasi serta 
+lokasi log error untuk melakukan perbaikan atau ketika menjalankan aplikasi
+yang ditanamkan pada dragonboard ataupun aplikasi yang dijalakan di server.
 * Desain
 ** Client
 Untuk Clientnya dibangun dengan menggunakan bahasa C. Menggunakan pthread, curl, sqlite3,
