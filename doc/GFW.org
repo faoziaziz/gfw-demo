@@ -3,8 +3,92 @@
 
 * Pengantar
 * Desain
+** Client
+Untuk Clientnya dibangun dengan menggunakan bahasa C. Menggunakan pthread, curl, sqlite3,
+dan libgpsd
+*** Run Time
+Karena menggunakan dinamic linking maka beberapa runtime harus tersedia di sbc dragonboard.
+Tetapi jika anda ingin melakukan development langsung pada device maka berikut  yang harus 
+diinstall.
+
+1. GNU build system (autoconf, automake, libtool)
+2. Curl
+3. pthread
+4. sqlite3
+*** Install dependency 
+#+BEGIN_SRC
+sudo apt-get install cmake make unzip
+sudo apt-get install libcurl4-openssl-dev
+sudo apt-get install libgps-dev libsqlite3-dev
+sudo apt-get install qdsp-start
+wget  https://s3.amazonaws.com/json-c_releases/releases/json-c-0.15.tar.gz
+tar -zxvf json-c-0.15.tar.gz
+cd json-c-0.15
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DBUILD_STATIC_LIBS=OFF    \
+      .. &&
+make && sudo make install
+#+END_SRC
+*** Clone repository 
+#+BEGIN_SRC bash
+wget https://github.com/faoziaziz/api-gfw/archive/latest.zip
+unzip latest.zip
+cd api-gfw-latest/
+#+END_SRC
+*** Membuat directory installer
+sebelum membuat membuild program pertama buatlah directory
+#+BEGIN_SRC
+sudo mkdir -p /opt/gfw 
+sudo chown $USER:$USER /opt/gfw/
+#+END_SRC
+*** Untuk membuild program
+#+BEGIN_SRC
+autoreconf -i
+./configure --prefix=/opt/gfw/
+make 
+make install
+#+END_SRC
+setelah terinstall maka akan ada file 
+#+BEGIN_SRC
+/opt/gfw/bin/api-gfw-client
+#+END_SRC
+dengan mengeksekusi file tersebut maka program akan berjalan.
+*** Log Error
+log error tersedia pada 
+#+BEGIN_SRC bash
+/opt/gfw/error.log
+#+END_SRC
+*** Database Device
+Jika tidak terdapat koneksi untuk mengirimkan data ke server maka file akan disimpan pada 
+database local 
+#+BEGIN_SRC bash
+/opt/gfw/gfw_data_gps.db
+#+END_SRC
+*** Konfigurasi Lainnya
+Anda juga bisa melakukan setting terhadap nama device, link url API atau  lokasi database local
+dengan mengedit file src/conf.h pada code yang di download.
+#+BEGIN_SRC c
+#ifndef __conf_h
+#define __conf_h
+
+/* this debug setting */
+#define DEBUG 1
+/* url api configuration*/
+#define URL_API "http://server.faozi.tech:8083/api-gfw/v1"
   
-** Format Pesan
+#define DEVICE "DRAGON001"
+#define DATABASE_LOC "/opt/gfw/gfw_data_gps.db"
+
+#endif
+#+END_SRC
+** Server
+Server menggunakan Spring-boot untuk aplikasi pengolah data dan Redis sebagai data
+storagenya. Data yang dikirimkan dari device menuju server menggunakan perantara 
+JSON. 
 *** Contoh data
 Contoh data yang di tampilkan dalam bentuk JSON
 #+BEGIN_SRC json

@@ -1,4 +1,4 @@
-% Created 2020-10-01 Kam 12:36
+% Created 2020-11-23 Mon 19:37
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -14,11 +14,10 @@
 \usepackage{amssymb}
 \usepackage{capt-of}
 \usepackage{hyperref}
-\author{Aziz Faozi}
 \date{\today}
 \title{GFW}
 \hypersetup{
- pdfauthor={Aziz Faozi},
+ pdfauthor={},
  pdftitle={GFW},
  pdfkeywords={},
  pdfsubject={},
@@ -32,56 +31,120 @@
 
 
 \section{Pengantar}
-\label{sec:org5e58c0a}
+\label{sec:org5531ce1}
 \section{Desain}
-\label{sec:org4cd2bce}
+\label{sec:orgd3c22ce}
+
 \subsection{Format Pesan}
-\label{sec:orge809dfe}
-\subsubsection{v1}
-\label{sec:org59e7d0a}
-untuk API versi pertama mengunakan perintah berikut ini
+\label{sec:orgf3eab6e}
+\subsubsection{Contoh data}
+\label{sec:orgb76c52b}
+Contoh data yang di tampilkan dalam bentuk JSON
 \begin{verbatim}
-
-{
-"id":"5",
-"device":"dev112",
-"longitude":123.321,
-"latitude":321.12,
-"dateStamp":"datetimebentukstring"
-}
-
-\end{verbatim}
-Dengan command seperti berikut 
-\begin{verbatim}
-curl -X POST http://localhost:8080/api-gfw/v1/add \
--H 'Content-type:application/json' -d \
-'{"id":"100", "device": "dev112", "longitude": \
- 123.321, "latitude": 321.12, \
-"DateStamp": "ngaceng"}'
-\end{verbatim}
-
-\subsubsection{v2}
-\label{sec:orga3cc1ff}
-Untuk perbaikan di versi pertama dengan tetap mempertahankan 
-versi pertama maka format pesan di buat pada v2 adalah sebagai berikut
-\begin{verbatim}
-{
-"device":"device1234",
-"data": {
-"position": {
-"longitude": [123.321, 123.321, ...]
-"latitude": [321.321, 123.321, ...]
-"datestamp": ["pos1", "pos2", ...]
-}
-}
+{ 
+"id":"27d48518-218a-11eb-9790-3f50feae72b1",
+"online":1.6048162822154794E9,
+"status":1.0,
+"sateliteUsed":15.0,
+"mode":3.0,
+"time":1.604816282E9,
+"altitude":199.31,
+"speed":0.0,
+"track":96.5,
+"pdop":1.3,
+"device":"DRAGON001",
+"longitude":106.725318833,
+"latitude":-6.555990667,
+"dateStamp":"Sun Nov  8 06:18:02 2020\n"
 }
 \end{verbatim}
+dari data tersebut anda bisa melihat beragam variable berikut penjelasannya
+\begin{center}
+\begin{tabular}{ll}
+\hline
+variable & keterangan\\
+\hline
+id & ID merupakan Identitas dari data yang dikirim. Nilai ini dibuat\\
+ & dengan menggunakan UUID.\\
+online & Merupakan variable yang dihasilkan dari status online pada gpsmon\\
+ & nilai ini juga memberikan nilai waktu.\\
+status & Status gps\\
+sateliteUsed & Merupakan jumlah satelite yang digunakan.\\
+mode & \\
+time & Merupakan waktu yang digunakan oleh GPS untuk menerima data.\\
+ & Waktu ini dalam format float.\\
+altitude & Nilai ketinggian dari data GPS,\\
+speed & Kecepatan perangkat yang tertangap GPS.\\
+track & \\
+pdop & \\
+longitude & Nilai longitude yang diberikan GPS.\\
+latitude & nilai latitude yang diberikan GPS.\\
+dateStamp & Merupakan waktu kirim data dari device ke server.\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Link API pada server}
+\label{sec:org7f60d4a}
+\subsubsection{Link API untuk GET semua data}
+\label{sec:org0cbe721}
+Untuk mendapatkan data dari seluruh data yang tersimpan pada
+server anda bisa melakukan transaksi seperti berikut.
+\begin{center}
+\begin{tabular}{ll}
+\hline
+URL & \url{http://server.faozi.tech:8083/api-gfw/v1/all}\\
+METHODE & GET\\
+RESPONSE & list Semua Data\\
+\end{tabular}
+\end{center}
+
+\subsubsection{Link API untuk POST data}
+\label{sec:org51c89a1}
+Untuk menambahkan data GPS pada server anda bisa melakukan
+transaksi dengan metode seperti berikut
+\begin{center}
+\begin{tabular}{ll}
+URL & \url{http://server.faozi.tech:8083/api-gfw/v1/add}\\
+METHODE & POST\\
+REQ\(_{\text{BODY}}\) & \{\\
+ & "id":"27d48518-218a-11eb-9790-3f50feae72b1",\\
+ & "online":1.6048162822154794E9,\\
+ & "status":1.0,\\
+ & "sateliteUsed":15.0,\\
+ & "mode":3.0,\\
+ & "time":1.604816282E9,\\
+ & "altitude":199.31,\\
+ & "speed":0.0,\\
+ & "track":96.5,\\
+ & "pdop":1.3,\\
+ & "device":"DRAGON001",\\
+ & "longitude":106.725318833,\\
+ & "latitude":-6.555990667,\\
+ & "dateStamp":"Sun Nov  8 06:18:02 2020\n"\\
+ & \}\\
+RESPONSE & Sama seperti REQ\(_{\text{BODY}}\)\\
+\end{tabular}
+\end{center}
+\subsubsection{Link untuk Status Server}
+\label{sec:org8606fbc}
+Untuk keperluan tertentu anda bisa melakukan checking server
+dengan melakukan GET pada URL berikut
+\begin{center}
+\begin{tabular}{ll}
+URL & \url{http://server.faozi.tech:8083/api-gfw/v1/status}\\
+METHODE & GET\\
+RESPONSE & \{"kode":1,"status":"OK"\}\\
+\end{tabular}
+\end{center}
+
 \section{Logbook}
-\label{sec:org1b7b24f}
+\label{sec:orgcc1a9c9}
 \subsection{Masalah}
-\label{sec:org73164d8}
-
-\subsubsection{\textit{<2020-10-01 Kam 12:31>}}
-\label{sec:orgd7a9651}
-Masih ada masalah dengan methode insert id di api. 
+\label{sec:org8ad9652}
+\subsubsection{AutoInsert API}
+\label{sec:orgeb7f8b4}
+Tanggal kasus : \textit{<2020-10-01 Thu 12:31> } . 
+Deskripsi : Masih ada masalah dengan methode insert id di api. 
+Setiap insert data belum bisa autoincremenet id. 
 \end{document}
