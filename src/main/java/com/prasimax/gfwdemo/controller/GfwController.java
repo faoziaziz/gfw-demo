@@ -1,3 +1,4 @@
+
 /*
   author : Aziz Amerul Faozi
   description : This code for api testing gfw
@@ -7,7 +8,7 @@ package com.prasimax.gfwdemo.controller;
 
 import com.prasimax.gfwdemo.models.GpsData;
 import com.prasimax.gfwdemo.repository.GpsDataRepo;
-
+import com.prasimax.gfwdemo.models.Status;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -27,9 +28,15 @@ class GfwController {
 	return _gpsDataRepo.findAll();
     }
 
+
     @GetMapping("/all/{id}")
     public GpsData GpsAll(@PathVariable("id") final String id){
 	return _gpsDataRepo.findById(id);
+    }
+
+    @GetMapping("/status")
+    public Status statusFunc(){
+	return new Status();
     }
 
     /*
