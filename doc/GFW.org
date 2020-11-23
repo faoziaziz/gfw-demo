@@ -26,6 +26,7 @@ Contoh data yang di tampilkan dalam bentuk JSON
 }
 #+END_SRC
 dari data tersebut anda bisa melihat beragam variable berikut penjelasannya
+|--------------+-------------------------------------------------------------------|
 | variable     | keterangan                                                        |
 |--------------+-------------------------------------------------------------------|
 | id           | ID merupakan Identitas dari data yang dikirim. Nilai ini dibuat   |
@@ -44,43 +45,19 @@ dari data tersebut anda bisa melihat beragam variable berikut penjelasannya
 | longitude    | Nilai longitude yang diberikan GPS.                               |
 | latitude     | nilai latitude yang diberikan GPS.                                |
 | dateStamp    | Merupakan waktu kirim data dari device ke server.                 |
-*** v1
-Untuk API versi pertama mengunakan perintah berikut ini
-#+BEGIN_SRC txt
+|--------------+-------------------------------------------------------------------|
 
-{
-"id":"5",
-"device":"dev112",
-"longitude":123.321,
-"latitude":321.12,
-"dateStamp":"datetimebentukstring"
-}
+** Link API pada server 
+*** Link API untuk GET semua data 
 
-#+END_SRC
-Dengan command seperti berikut 
-#+BEGIN_SRC bash
-curl -X POST http://localhost:8080/api-gfw/v1/add \
--H 'Content-type:application/json' -d \
-'{"id":"100", "device": "dev112", "longitude": \
- 123.321, "latitude": 321.12, \
-"DateStamp": "ngaceng"}'
-#+END_SRC
+|----------+----------------------------------------------|
+| URL      | http://server.faozi.tech:8083/api-gfw/v1/all |
+| METHODE  | GET                                          |
+| RESPONSE | list Semua Data                              |
+|----------+----------------------------------------------|
 
-*** v2
-Untuk perbaikan di versi pertama dengan tetap mempertahankan 
-versi pertama maka format pesan di buat pada v2 adalah sebagai berikut
-#+BEGIN_SRC txt
-{
-"device":"device1234",
-"data": {
-"position": {
-"longitude": [123.321, 123.321, ...]
-"latitude": [321.321, 123.321, ...]
-"datestamp": ["pos1", "pos2", ...]
-}
-}
-}
-#+END_SRC
+*** Link API untuk POST data 
+
 * Logbook
 ** Masalah 
 *** AutoInsert API
