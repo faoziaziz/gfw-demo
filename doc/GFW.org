@@ -96,6 +96,20 @@ dengan mengedit file src/conf.h pada code yang di download.
 
 #endif
 #+END_SRC
+
+*** Menambahkan script autostart
+untuk menambahkan script autostart 
+#+BEGIN_SRC BASH
+cp autostart.sh /opt/gfw/
+#+END_SRC
+Jika anda ingin menambahkan autostart pada crontab gunakan perintah crontab -e
+#+BEGIN_SRC
+crontab -e
+#+END_SRC
+lalu tambahkan code berikut (terserah, itu adalah baris code)
+#+BEGIN_SRC
+* * * * * /bin/sh /opt/gfw/autostart.sh
+#+END_SRC
 ** Server
 Server menggunakan Spring-boot untuk aplikasi pengolah data dan Redis sebagai data
 storagenya. Data yang dikirimkan dari device menuju server menggunakan perantara 
