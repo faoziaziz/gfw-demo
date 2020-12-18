@@ -54,6 +54,7 @@ sudo chown $USER:$USER /opt/gfw/
 autoreconf -i
 ./configure --prefix=/opt/gfw/
 make 
+make clean
 make install
 #+END_SRC
 setelah terinstall maka akan ada file 
