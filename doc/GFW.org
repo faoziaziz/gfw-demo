@@ -111,6 +111,12 @@ lalu tambahkan code berikut (terserah, itu adalah baris code)
 #+BEGIN_SRC
 * * * * * /bin/sh /opt/gfw/autostart.sh
 #+END_SRC
+
+*** Untuk Kill
+jika anda membutuhkan cara untuk kill program semisal kebutuhan untuk restart gunakan perintah berikut
+#+BEGIN_SRC bash
+kill $(ps aux | grep 'api-gfw-client' | awk '{print $2}')
+#+END_SRC
 ** Server
 Server menggunakan Spring-boot untuk aplikasi pengolah data dan Redis sebagai data
 storagenya. Data yang dikirimkan dari device menuju server menggunakan perantara 
